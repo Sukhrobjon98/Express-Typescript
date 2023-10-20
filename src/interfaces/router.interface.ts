@@ -1,9 +1,9 @@
 import { Router } from "express"
 
-interface Controller{
+interface IRouter{
     path:string
     router:Router
 }
 
 
-export default Controller
+export default IRouter

@@ -1,16 +1,16 @@
 import express, { Application } from "express";
-import Controller from "./utils/interfaces/controller.interface";
+import IRouter from "./interfaces/router.interface";
 import ErrorMiddleware from "./middlewares/error.middleware";
 import cors from "cors";
 
 export class App {
   public app: Application;
   public port: number;
-  constructor(controllers: Controller[], port: number) {
+  constructor(routers: IRouter[], port: number) {
     this.app = express();
     this.port = port;
     this.initializeMiddlewares();
-    this.initializeControllers(controllers);
+    this.initializeRouters(routers);
     this.initializeErrorHandling();
     this.listen();
   }
@@ -23,9 +23,9 @@ export class App {
       })
     );
   }
-  private initializeControllers(controllers: Controller[]): void {
-    controllers.forEach((controller: Controller) => {
-      this.app.use("/", controller.router);
+  private initializeRouters(controllers: IRouter[]): void {
+    controllers.forEach((router: IRouter) => {
+      this.app.use("/", router.router);
     });
   }
   private initializeErrorHandling(): void {

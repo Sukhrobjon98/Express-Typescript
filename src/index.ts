@@ -1,8 +1,5 @@
+import { CommentRouter } from "./routers/comment.routers";
 import App from "./app";
-import "dotenv/config";
-import validEnv from "./utils/validateEnv";
-import CommentController from "./resources/comments/comment.controller";
-let controllers = [new CommentController()];
-validEnv();
-let app = new App(controllers, 4000);
-
+import { config } from "./utils/config";
+let controllers = [new CommentRouter()];
+let app = new App(controllers, Number(config.get("PORT")));
